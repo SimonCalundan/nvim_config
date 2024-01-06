@@ -60,7 +60,8 @@ vim.keymap.set('n', '<Right>', '<Cmd>vsplit<CR><C-w>l', { noremap = true, silent
 vim.keymap.set('n', '<Down>', '<Cmd>split<CR><C-w>j', { noremap = true, silent = true })
 
 -- Formater kode
-vim.keymap.set("n", "<leader>p", vim.lsp.buf.format, { noremap = true, silent = true })
+--vim.keymap.set("n", "<leader>p", vim.lsp.buf.format, { noremap = true, silent = true }) -- Gamle formaterings keymap
+vim.keymap.set("n", "<leader>p", "mzgg=G`z", { noremap = true, silent = true }) -- Ny formaterings keymap
 -- Går ud af terminal når man er i terminal mode
 vim.keymap.set('t', '<C-Space>', [[<C-\><C-n>]], { noremap = true })
 
