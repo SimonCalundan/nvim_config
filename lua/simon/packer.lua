@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
         end, }
     use("nvim-treesitter/playground")
     use("theprimeagen/harpoon")
+    -- Delay repeat execution of certain keys
+    use 'ja-ford/delaytrain.nvim'
     use("mbbill/undotree")
     use("tpope/vim-fugitive")
     use {
