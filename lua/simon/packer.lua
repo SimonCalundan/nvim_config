@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
+    use 'theprimeagen/vim-be-good'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
