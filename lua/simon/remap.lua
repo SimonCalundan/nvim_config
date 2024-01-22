@@ -19,7 +19,6 @@ vim.keymap.set("n", "<leader>svwm", function()
     require("vim-with-me").StopVimWithMe()
 end)
 
-
 -- greatest remap ever. Hvis man markerer noget med yank
 -- Så kan kan man derefter markere et ord og lave leader p
 -- for at erstatte det ny markede ord med det yankede ord
