@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
--- This is going to get me cancelled
+-- Rebind escape til at være tab som er rebinded til F13
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("v", "<F13>", "<Esc>")
 vim.keymap.set("x", "<F13>", "<Esc>")
@@ -45,15 +45,15 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- Stå på et ord og rediger alle tilfælde af det ord i filen
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- Gør filen executable
 
 -- vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
-end)
+end) -- Reload neovim config
 
 --[[ -- Split window to the right and move focus to the new window
 vim.keymap.set('n', '<Right>', '<Cmd>vsplit<CR><C-w>l', { noremap = true, silent = true })
@@ -73,6 +73,7 @@ vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { noremap = t
 -- Split windows
 vim.keymap.set('n', '<leader>h', '<Cmd>vsplit<CR><C-w>l', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>v', '<Cmd>split<CR><C-w>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<Up>', '<C-w>w', { noremap = true, silent = true })
 
 -- Resize windows
 vim.keymap.set("n", "<Left>", ":vertical resize +4<CR>")
