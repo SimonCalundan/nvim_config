@@ -73,6 +73,8 @@ return require('packer').startup(function(use)
       require('Comment').setup()
     end
   }
+  use { 'preservim/nerdtree' }
+  use { 'ryanoasis/vim-devicons' }
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
