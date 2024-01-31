@@ -134,4 +134,5 @@ return require('packer').startup(function(use)
     end
   })
   use('jbyuki/instant.nvim')
+  use('christoomey/vim-tmux-navigator')
 end)
