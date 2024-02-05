@@ -135,4 +135,10 @@ return require('packer').startup(function(use)
   })
   use('jbyuki/instant.nvim')
   use('christoomey/vim-tmux-navigator')
+  use {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  }
 end)
