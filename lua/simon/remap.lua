@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.NERDTreeToggle) -- Open NERDTree
-vim.keymap.set("n", "<leader>nf", vim.cmd.NERDTreeFind)  -- Open NERDTree with current file selected
+vim.keymap.set("n", "<leader>nf", vim.cmd.NERDTreeFind)   -- Open NERDTree with current file selected
 -- Når man er i visual mode, kan man trykke stort K eller J for at flytte markerede tekst
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -68,6 +68,8 @@ vim.keymap.set('n', '<leader>v', '<Cmd>split<CR><C-w>j', { noremap = true, silen
 -- Resize windows
 vim.keymap.set("n", "<Left>", ":vertical resize +4<CR>")
 vim.keymap.set("n", "<Right>", ":vertical resize -4<CR>")
+vim.keymap.set("n", "<Up>", ":horizontal resize -4<CR>")
+vim.keymap.set("n", "<Down>", ":horizontal resize +4<CR>")
 
 
 -- Vim tmux navigator
@@ -76,3 +78,41 @@ vim.keymap.set('n', '{Down-Mapping}', '<Cmd>TmuxNavigateDown<CR>', { silent = tr
 vim.keymap.set('n', '{Up-Mapping}', '<Cmd>TmuxNavigateUp<CR>', { silent = true })
 vim.keymap.set('n', '{Right-Mapping}', '<Cmd>TmuxNavigateRight<CR>', { silent = true })
 vim.keymap.set('n', '{Previous-Mapping}', '<Cmd>TmuxNavigatePrevious<CR>', { silent = true })
+
+
+-- JSX comments
+vim.keymap.set("v", "<leader>x", function()
+    -- Yank the visually selected text to update the '< and '> marks
+    vim.cmd('normal! y')
+
+    local s_start, s_end = vim.fn.getpos("'<"), vim.fn.getpos("'>")
+    local start_line, start_col, end_line, end_col = s_start[2], s_start[3] - 1, s_end[2], s_end[3] - 1
+
+    -- Adjust start_col and end_col for 0-indexing
+    start_col = math.max(start_col, 0)
+
+    -- Adjust end_col for the end of the line if it's set to the maximum value
+    if end_col == 2^31-1 then
+        end_col = vim.fn.col("'>") - 1
+    end
+
+    -- Get the text of the last line of the selection
+    local line_text = vim.api.nvim_buf_get_lines(0, end_line - 1, end_line, false)[1]
+
+    -- Adjust end_col to be at the end of the line if needed
+    if end_col > #line_text then
+        end_col = #line_text
+    elseif end_col == 0 then
+        end_col = #line_text
+    end
+
+    -- Insert the comments
+    vim.api.nvim_buf_set_text(0, end_line - 1, end_col, end_line - 1, end_col, {" */}"})
+    vim.api.nvim_buf_set_text(0, start_line - 1, start_col, start_line - 1, start_col, {"{/* "})
+
+    -- Restore the visual selection
+    vim.cmd('normal! gv')
+end, {silent = true})
+
+
+
